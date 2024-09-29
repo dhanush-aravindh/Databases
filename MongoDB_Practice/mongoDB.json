@@ -1,0 +1,102 @@
+
+db.movies.insertOne({
+
+    _id:100,
+    name:"Avatar",
+    year : 2023,
+    genre : ['Action','Sci-fi','Drama'],
+    ratings : 7.7
+
+})
+
+//adding multiple elements into db
+db.movies.insertMany([
+    {
+        _id:101,
+        name:"John Wick: Chapter 4",
+        year : 2023,
+        genre : ["Action","Sci-fi","Adventure","Drama"],
+        ratings : 7.7
+    },
+
+    {
+        _id:102,
+        name:"The Flash",
+        year : 2023,
+        genre : ["Action","Sci-fi","Adventure","Drama"],
+        ratings : 6.7
+    },
+    
+    {
+        _id:103,
+        name:"Gaudians of the Galaxy Vol. 3",
+        year : 2023,
+        genre : ["Action","Sci-fi","Adventure","Drama"],
+        ratings : 8.9
+    },
+    
+    ])
+
+
+
+db.movies.find() //fetches all the values in the database
+
+// Finding only one element in the movies db
+db.movies.findOne()
+
+// Finding values based on some condition
+db.movies.find({ratings:6.7})
+
+// Projection Technique to find or fetch values from db.
+// In this technique we can get only the required and specific values
+// {}--> the entire database
+// {{name:1,genre:1}} --> Projection, name:1 means that name is equal to true or include values of name,it is the same for genre
+db.movies.find({},{name:1,genre:1})
+
+// Excluding some values based on some conditions
+// _id:0 --> Excluded values of _id from the db
+db.movies.find({},{_id:0,name:1,genre:1})
+
+// Updating values in the database
+db.movies.updateOne(
+{
+    name:"Avatar"
+},
+{
+    $set:{ratings:8.5}
+})
+
+//updating many values
+db.movies.updateMany({},
+{
+    $inc:{ratings:1}
+})
+
+db.movies.updateOne({name:"John Wick: Chapter 4"},
+{
+    $set:{ratings:7.7}
+})
+
+db.movies.insertOne(  {
+    _id:104,
+    name:"Black Panter",
+    year : 2018,
+    genre : ['Action','Sci-fi','Adventure','Drama'],
+    ratings : 8.5,
+    reviews:[
+        {
+            autherName: "Bob",
+            rating: 9,
+            review:"Best movie of the marvel universe"
+        },
+        {
+            autherName: "John",
+            rating: 5,
+            review:"Good, but not that good!"
+        }
+    ]
+
+})
+
+db.movies.findOne({name:"Black Panter"},{reviews:1})
+
